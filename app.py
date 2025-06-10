@@ -1,17 +1,13 @@
-from flask import Flask, jsonify, request, abort, send_from_directory
+from flask import Flask, jsonify, request, abort, render_template
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__,)
 
 tasks = []
 next_id = 1
 
 @app.route('/')
 def serve_index():
-    return send_from_directory(app.static_folder, 'index.html')
-
-@app.route('/')
-def home():
-    return 'Bem-vindo à API de Tarefas! Use a rota /tasks para interagir.'
+    return render_template('index.html')
 
 # Listar tarefas, opcional filtro por status (?completed=true/false)
 @app.route('/tasks', methods=['GET'])
